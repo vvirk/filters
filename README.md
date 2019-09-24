@@ -1,4 +1,3 @@
-# Filters
 # [Filters](https://vvirk.github.io/filters/)
 
 ## The simple React and Redux web app requests users data from the server and displays them on a web page.
