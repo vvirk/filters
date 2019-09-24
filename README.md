@@ -1,10 +1,9 @@
 # Filters
-[Filters](https://vvirk.github.io/filters/)
+# [Filters](https://vvirk.github.io/filters/)
 
-# The simple React and Redux web app requests users data from the server and
-# displays them on a web page.
+## The simple React and Redux web app requests users data from the server and displays them on a web page.
 
-# Features:
+## Features:
 
  - View list of users
  - Filter the list of users by name, surname, age and gender
