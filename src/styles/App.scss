@@ -3,6 +3,10 @@
 @import 'variables';
 @import 'mixins';
 
+input {
+    box-sizing: border-box;
+}
+
 .app-wrapper {
     width: 100%;
     height: 100vh;

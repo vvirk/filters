@@ -16,4 +16,3 @@ export const getUsers = () => async dispatch => {
     console.log(e);
   }
 };
-

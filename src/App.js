@@ -1,4 +1,5 @@
 import React from 'react';
+import { UsersContainer } from './containers/UsersContainer';
 import './styles/App.scss';
 
 function App() {
@@ -6,7 +7,7 @@ function App() {
     <div className="app-wrapper">
       <div className="app-inner">
         <div className="content">
-          app
+          <UsersContainer />
         </div>
       </div>
     </div>
