@@ -19,97 +19,62 @@ export class Users extends React.Component {
     this.props.getUsers();
   }
 
+  handleChangeName = event => {
+    this.setState({ name: event.target.value });
+  }
+
+  handleChangeLastname = event => {
+    this.setState({ lastname: event.target.value });
+  }
+
+  handleChangeAge = event => {
+    this.setState({ age: event.target.value });
+  }
+
+  handleChangeM = event => {
+    if (!event.target.checked) {
+      this.setState({ male: event.target.checked });
+    } else this.setState({ male: event.target.checked });
+  }
+
+  handleChangeF = event => {
+    if (!event.target.checked) {
+      this.setState({ female: event.target.checked });
+    } else this.setState({ female: event.target.checked });
+  }
+
   render() {
     const { users } = this.props;
     console.log(users);
-
-    const handleChangeName = event => {
-      this.setState({ name: event.target.value });
-    };
-
-    const handleChangeLastname = event => {
-      this.setState({ lastname: event.target.value });
-    };
-
-    const handleChangeAge = event => {
-      this.setState({ age: event.target.value });
-    };
-
-    const handleChangeM = event => {
-      if (event.target.checked) {
-        this.setState({ male: event.target.checked });
-      }
-    };
-
-    const handleChangeF = event => {
-      if (event.target.checked) {
-        this.setState({ female: event.target.checked });
-      }
-    };
-
     const showUsers = (name, lastname, age, male, female, arr) => {
+      let filterUsers = arr;
       if (name !== '' && arr) {
-        const filterNames = arr.filter(user => user.name.includes(name));
-        return filterNames.map(filterName => (
-          <>
-            <div>{filterName.name}</div>
-            <div>{filterName.lastname}</div>
-            <div>{filterName.age}</div>
-            <div>{filterName.sex}</div>
-          </>
-        ));
-      } else if (lastname !== '' && arr) {
-          const filterLastnames = arr.filter(user => user.lastname.includes(lastname));
-          return filterLastnames.map(filterLastname => (
-          <>
-            <div>{filterLastname.name}</div>
-            <div>{filterLastname.lastname}</div>
-            <div>{filterLastname.age}</div>
-            <div>{filterLastname.sex}</div>
-          </>
-        ));
-      } else if (age !== '' && arr) {
-        const filterAges = arr.filter(user => user.age == age)
-        return filterAges.map(filterAge => (
-          <>
-            <div>{filterAge.name}</div>
-            <div>{filterAge.lastname}</div>
-            <div>{filterAge.age}</div>
-            <div>{filterAge.sex}</div>
-          </>
-        ))
-      } else if (male && arr) {
-        const filterMales = arr.filter(user => ( user.sex === 'm'));
-        return filterMales.map(filterMale => (
-          <>
-            <div>{filterMale.name}</div>
-            <div>{filterMale.lastname}</div>
-            <div>{filterMale.age}</div>
-            <div>{filterMale.sex}</div>
-          </>
-        ));
-      } else if (female && arr) {
-        const filterFemales = arr.filter(user => ( user.sex === 'f'));
-        return filterFemales.map(filterFemale => (
-          <>
-            <div>{filterFemale.name}</div>
-            <div>{filterFemale.lastname}</div>
-            <div>{filterFemale.age}</div>
-            <div>{filterFemale.sex}</div>
-          </>
-        ));
-      } else {
-      return arr
-        ? arr.map(user => (
+        filterUsers = filterUsers.filter(user => user.name.includes(name));
+      } 
+      if (lastname !== '' && arr) {
+          filterUsers = filterUsers.filter(user => user.lastname.includes(lastname));
+      }
+      if (age !== '' && arr) {
+        filterUsers = filterUsers.filter(user => user.age == age);
+      }
+      if (male && arr) {
+        filterUsers = filterUsers.filter(user => user.sex === 'm');
+      }
+      if (female && arr) {
+        filterUsers = filterUsers.filter(user => user.sex === 'f');
+      }
+      if (male && female && arr) {
+        filterUsers = filterUsers.filter(user => user.sex === 'f' && user.sex === 'm');
+      }
+      return (filterUsers ? filterUsers.map(filterUser => (
             <>
-              <div>{user.name}</div>
-              <div>{user.lastname}</div>
-              <div>{user.age}</div>
-              <div>{user.sex}</div>
+              <div>{filterUser.name}</div>
+              <div>{filterUser.lastname}</div>
+              <div>{filterUser.age}</div>
+              <div>{filterUser.sex}</div>
             </>
-          ))
-        : null;
-    };
+          )) : null
+      );
   }
     return (
       <div id={s.users}>
@@ -117,7 +82,7 @@ export class Users extends React.Component {
           <input
             type="text"
             placeholder="name"
-            onChange={handleChangeName}
+            onChange={this.handleChangeName}
             value={this.state.name}
           />
         </div>
@@ -125,7 +90,7 @@ export class Users extends React.Component {
           <input
             type="text"
             placeholder="lastname"
-            onChange={handleChangeLastname}
+            onChange={this.handleChangeLastname}
             value={this.state.lastname}
           />
         </div>
@@ -133,18 +98,18 @@ export class Users extends React.Component {
           <input
             type="text"
             placeholder="age"
-            onChange={handleChangeAge}
+            onChange={this.handleChangeAge}
             value={this.state.age}
           />
         </div>
         <div>
           <label>
             male
-            <input type="checkbox" value="m" onChange={handleChangeM} />
+            <input type="checkbox" onChange={this.handleChangeM} />
           </label>
           <label>
             female
-            <input type="checkbox" value="f" onChange={handleChangeF} />
+            <input type="checkbox" onChange={this.handleChangeF} />
           </label>
         </div>
         {showUsers(
