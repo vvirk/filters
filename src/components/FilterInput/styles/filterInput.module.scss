@@ -1,0 +1,12 @@
+.filter {
+    padding: 10px;
+    border: transparent;
+    border-radius: 5px 0 0 5px;
+    box-shadow: 0 1px 6px 0 rgba(32,33,36,.28);
+    border-color: rgba(223,225,229,0);
+    &::placeholder {
+        color: gray;
+        font-size: 16px;
+        font-style: italic;
+    }
+}

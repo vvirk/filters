@@ -1,0 +1,17 @@
+.filter {
+    display: flex;
+    margin-right: 10px;
+    padding: 10px;
+    border: transparent;
+    border-radius: 5px 0 0 5px;
+    box-shadow: 0 1px 6px 0 rgba(32,33,36,.28);
+    border-color: rgba(223,225,229,0);
+    font-style: italic;
+    font-weight: 16px;
+    color: gray;
+    cursor: pointer;
+}
+
+.checkbox {
+    margin-left: 10px;
+}

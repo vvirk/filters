@@ -1,4 +1,6 @@
 import React from 'react';
+import { FilterInput } from '../FilterInput/FilterInput';
+import { FilterCheckbox } from '../FilterCheckbox/FIlterCheckbox';
 
 // styles
 import s from './styles/users.module.scss';
@@ -45,7 +47,7 @@ export class Users extends React.Component {
 
   render() {
     const { users } = this.props;
-    console.log(users);
+    const { name, lastname, age, male, female} = this.state;
     const showUsers = (name, lastname, age, male, female, arr) => {
       let filterUsers = arr;
       if (name !== '' && arr) {
@@ -55,7 +57,7 @@ export class Users extends React.Component {
           filterUsers = filterUsers.filter(user => user.lastname.includes(lastname));
       }
       if (age !== '' && arr) {
-        filterUsers = filterUsers.filter(user => user.age == age);
+        filterUsers = filterUsers.filter(user => user.age === +age);
       }
       if (male && arr) {
         filterUsers = filterUsers.filter(user => user.sex === 'm');
@@ -68,56 +70,60 @@ export class Users extends React.Component {
       }
       return (filterUsers ? filterUsers.map(filterUser => (
             <>
-              <div>{filterUser.name}</div>
-              <div>{filterUser.lastname}</div>
-              <div>{filterUser.age}</div>
-              <div>{filterUser.sex}</div>
+              <div className={s.usersItem}>{filterUser.name}</div>
+              <div className={s.usersItem}>{filterUser.lastname}</div>
+              <div className={s.usersItem}>{filterUser.age}</div>
+              <div className={s.usersItem}>{filterUser.sex}</div>
             </>
           )) : null
       );
   }
     return (
       <div id={s.users}>
-        <div>
-          <input
+        <div className={s.usersItem}>
+          <FilterInput
             type="text"
-            placeholder="name"
+            placeholder="имя"
             onChange={this.handleChangeName}
             value={this.state.name}
           />
         </div>
-        <div>
-          <input
+        <div className={s.usersItem}>
+          <FilterInput
             type="text"
-            placeholder="lastname"
+            placeholder="фамилия"
             onChange={this.handleChangeLastname}
             value={this.state.lastname}
           />
         </div>
-        <div>
-          <input
+        <div className={s.usersItem}>
+          <FilterInput
             type="text"
-            placeholder="age"
+            placeholder="возраст"
             onChange={this.handleChangeAge}
             value={this.state.age}
           />
         </div>
-        <div>
-          <label>
-            male
-            <input type="checkbox" onChange={this.handleChangeM} />
-          </label>
-          <label>
-            female
-            <input type="checkbox" onChange={this.handleChangeF} />
-          </label>
+        <div className={s.usersItem}>
+          <FilterCheckbox
+            label="M"
+            type="checkbox" 
+            onChange={this.handleChangeM} 
+            checked={male}
+          />
+          <FilterCheckbox
+            label="Ж"
+            type="checkbox" 
+            onChange={this.handleChangeF} 
+            checked={female}
+          />
         </div>
         {showUsers(
-          this.state.name,
-          this.state.lastname,
-          this.state.age,
-          this.state.male,
-          this.state.female,
+          name,
+          lastname,
+          age,
+          male,
+          female,
           users,
         )}
       </div>
