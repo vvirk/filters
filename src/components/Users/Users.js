@@ -35,19 +35,20 @@ export class Users extends React.Component {
 
   handleChangeM = event => {
     if (!event.target.checked) {
-      this.setState({ male: event.target.checked });
-    } else this.setState({ male: event.target.checked });
+      this.setState({ male: event.target.checked, });
+    } else this.setState({ male: event.target.checked, });
   }
 
   handleChangeF = event => {
     if (!event.target.checked) {
-      this.setState({ female: event.target.checked });
+      this.setState({ female: event.target.checked});
     } else this.setState({ female: event.target.checked });
   }
 
   render() {
     const { users } = this.props;
     const { name, lastname, age, male, female} = this.state;
+    console.log(male);
     const showUsers = (name, lastname, age, male, female, arr) => {
       let filterUsers = arr;
       if (name !== '' && arr) {
@@ -64,9 +65,6 @@ export class Users extends React.Component {
       }
       if (female && arr) {
         filterUsers = filterUsers.filter(user => user.sex === 'f');
-      }
-      if (male && female && arr) {
-        filterUsers = filterUsers.filter(user => user.sex === 'f' && user.sex === 'm');
       }
       return (filterUsers ? filterUsers.map(filterUser => (
             <>
